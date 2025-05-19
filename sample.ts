@@ -1,4 +1,4 @@
-import { init } from "./chaser.js";
+import { init } from "./chaser.ts";
 
 const client = await init();
 

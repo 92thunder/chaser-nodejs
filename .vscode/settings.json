@@ -2,5 +2,6 @@
   "[javascript]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
-  "files.eol": "\n"
+  "files.eol": "\n",
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }

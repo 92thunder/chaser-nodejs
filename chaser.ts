@@ -1,6 +1,23 @@
 import readline from "node:readline/promises";
 import net from "node:net";
 
+type Empty = "0";
+type Enemy = "1";
+type Block = "2";
+type Item = "3";
+
+type Cell = Empty | Enemy | Block | Item;
+
+type Direction = "up" | "down" | "right" | "left";
+
+interface ChaserClient {
+	getReady(): Promise<Cell[9]>;
+	search(direction: Direction): Promise<string>;
+	look(direction: Direction): Promise<string>;
+	walk(direction: Direction): Promise<string>;
+	put(direction: Direction): Promise<string>;
+}
+
 async function initTcpClient() {
 	const rl = readline.createInterface({
 		input: process.stdin,
@@ -38,7 +55,7 @@ async function initTcpClient() {
 }
 
 async function waitMyTurn(client) {
-	return new Promise((resolve) => {
+	return new Promise<void>((resolve) => {
 		client.once("data", (data) => {
 			if (data.toString().includes("@")) {
 				resolve();
@@ -49,11 +66,11 @@ async function waitMyTurn(client) {
 	});
 }
 
-async function sendCommand(client, command) {
+async function sendCommand(client, command): Promise<Cell[9]> {
 	if (command === "gr") {
 		await waitMyTurn(client);
 	}
-	return new Promise((resolve) => {
+	return new Promise<string>((resolve) => {
 		client.once("data", (data) => {
 			if (command !== "gr") {
 				client.write("#\r\n");
@@ -64,11 +81,11 @@ async function sendCommand(client, command) {
 	});
 }
 
-export async function init() {
+export async function init(): Promise<ChaserClient> {
 	const client = await initTcpClient();
 
 	const chaserClient = {
-		async getReady() {
+		async getReady(): Promise<Cell[9]> {
 			return sendCommand(client, "gr");
 		},
 		search(direction) {
