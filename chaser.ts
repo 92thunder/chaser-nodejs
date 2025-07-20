@@ -19,19 +19,24 @@ interface ChaserClient {
 }
 
 async function initTcpClient() {
-	const rl = readline.createInterface({
-		input: process.stdin,
-		output: process.stdout,
-	});
+	let host = "127.0.0.1";
+	let port = 2009;
+	let name = "test player";
 
-	const host =
-		(await rl.question("サーバーのIPアドレスを入力してください > ")) ||
-		"127.0.0.1";
-	const port =
-		Number(await rl.question("ポート番号を入力してください > ")) || 2009;
-	const name =
-		(await rl.question("ユーザー名を入力してください > ")) || "test player";
-	rl.close();
+	if (process.env.NODE_ENV !== "development") {
+		const rl = readline.createInterface({
+			input: process.stdin,
+			output: process.stdout,
+		});
+
+		host =
+			(await rl.question("サーバーのIPアドレスを入力してください > ")) ||
+			"127.0.0.1";
+		port = Number(await rl.question("ポート番号を入力してください > ")) || 2009;
+		name =
+			(await rl.question("ユーザー名を入力してください > ")) || "test player";
+		rl.close();
+	}
 
 	const client = net.connect(port, host, () => {
 		console.info(`Connected to  ${host} !`);
