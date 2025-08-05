@@ -2,18 +2,34 @@ import readline from "node:readline/promises";
 import net from "node:net";
 
 type Empty = "0";
+export const EMPTY: Empty = "0";
 type Enemy = "1";
+export const ENEMY = "1";
 type Block = "2";
+export const BLOCK: Block = "2";
 type Item = "3";
+export const ITEM: Item = "3";
 
 type Cell = Empty | Enemy | Block | Item;
+type ReadyResult = {
+	upLeft: Cell;
+	up: Cell;
+	upRight: Cell;
+	left: Cell;
+	center: Cell;
+	right: Cell;
+	bottomLeft: Cell;
+	down: Cell;
+	bottomRight: Cell;
+	raw: string;
+};
 
-type Direction = "up" | "down" | "right" | "left";
+export type Direction = "up" | "down" | "right" | "left";
 
 interface ChaserClient {
-	getReady(): Promise<Cell[9]>;
+	getReady(): Promise<ReadyResult>;
 	search(direction: Direction): Promise<string>;
-	look(direction: Direction): Promise<string>;
+	look(direction: Direction): Promise<ReadyResult>;
 	walk(direction: Direction): Promise<string>;
 	put(direction: Direction): Promise<string>;
 }
@@ -90,8 +106,20 @@ export async function init(): Promise<ChaserClient> {
 	const client = await initTcpClient();
 
 	const chaserClient = {
-		async getReady(): Promise<Cell[9]> {
-			return sendCommand(client, "gr");
+		async getReady(): Promise<ReadyResult> {
+			const readyResult = await sendCommand(client, "gr");
+			return {
+				upLeft: readyResult[0] as Cell,
+				up: readyResult[1] as Cell,
+				upRight: readyResult[2] as Cell,
+				left: readyResult[3] as Cell,
+				center: readyResult[4] as Cell,
+				right: readyResult[5] as Cell,
+				bottomLeft: readyResult[6] as Cell,
+				down: readyResult[7] as Cell,
+				bottomRight: readyResult[8] as Cell,
+				raw: readyResult,
+			};
 		},
 		search(direction) {
 			switch (direction) {
@@ -107,19 +135,36 @@ export async function init(): Promise<ChaserClient> {
 					throw new Error("引数が間違っています");
 			}
 		},
-		look(direction) {
+		async look(direction) {
+			let lookResult: string;
 			switch (direction) {
 				case "up":
-					return sendCommand(client, "lu");
+					lookResult = await sendCommand(client, "lu");
+					break;
 				case "down":
-					return sendCommand(client, "ld");
+					lookResult = await sendCommand(client, "ld");
+					break;
 				case "right":
-					return sendCommand(client, "lr");
+					lookResult = await sendCommand(client, "lr");
+					break;
 				case "left":
-					return sendCommand(client, "ll");
+					lookResult = await sendCommand(client, "ll");
+					break;
 				default:
 					throw new Error("引数が間違っています");
 			}
+			return {
+				upLeft: lookResult[0] as Cell,
+				up: lookResult[1] as Cell,
+				upRight: lookResult[2] as Cell,
+				left: lookResult[3] as Cell,
+				center: lookResult[4] as Cell,
+				right: lookResult[5] as Cell,
+				bottomLeft: lookResult[6] as Cell,
+				down: lookResult[7] as Cell,
+				bottomRight: lookResult[8] as Cell,
+				raw: lookResult,
+			};
 		},
 		walk(direction) {
 			switch (direction) {

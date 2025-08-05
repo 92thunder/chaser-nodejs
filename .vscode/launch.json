@@ -9,11 +9,11 @@
 			"request": "launch",
 			"name": "Launch Program",
 			"skipFiles": ["<node_internals>/**"],
-			"program": "sample.ts",
+			"program": "${file}",
 			"outFiles": ["${workspaceFolder}/**/*.js"],
 			"console": "integratedTerminal",
 			"env": {
-				"NODE_ENV": "development",
+				"NODE_ENV": "development"
 			}
 		}
 	]

@@ -1,9 +1,11 @@
-import { init } from "./chaser.ts";
+import { type Direction, EMPTY, ENEMY, BLOCK, ITEM, init } from "./chaser.ts";
 
 const client = await init();
 
 while (true) {
 	const values = await client.getReady();
 	console.log(values);
-	await client.look("right");
+
+	let direction: Direction = "right";
+	await client.walk(direction);
 }
