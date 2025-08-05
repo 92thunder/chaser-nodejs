@@ -18,9 +18,9 @@ type ReadyResult = {
 	left: Cell;
 	center: Cell;
 	right: Cell;
-	bottomLeft: Cell;
+	downLeft: Cell;
 	down: Cell;
-	bottomRight: Cell;
+	downRight: Cell;
 	raw: string;
 };
 
@@ -115,9 +115,9 @@ export async function init(): Promise<ChaserClient> {
 				left: readyResult[3] as Cell,
 				center: readyResult[4] as Cell,
 				right: readyResult[5] as Cell,
-				bottomLeft: readyResult[6] as Cell,
+				downLeft: readyResult[6] as Cell,
 				down: readyResult[7] as Cell,
-				bottomRight: readyResult[8] as Cell,
+				downRight: readyResult[8] as Cell,
 				raw: readyResult,
 			};
 		},
@@ -160,9 +160,9 @@ export async function init(): Promise<ChaserClient> {
 				left: lookResult[3] as Cell,
 				center: lookResult[4] as Cell,
 				right: lookResult[5] as Cell,
-				bottomLeft: lookResult[6] as Cell,
+				downLeft: lookResult[6] as Cell,
 				down: lookResult[7] as Cell,
-				bottomRight: lookResult[8] as Cell,
+				downRight: lookResult[8] as Cell,
 				raw: lookResult,
 			};
 		},
