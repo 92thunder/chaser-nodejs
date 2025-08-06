@@ -22,4 +22,4 @@ if (direction === "right") {
 	console.log("left!");
 }
 
-export {}
+export {};

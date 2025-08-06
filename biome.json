@@ -2,7 +2,8 @@
 	"linter": {
 		"rules": {
 			"style": {
-				"useConst": "off"
+				"useConst": "off",
+				"useExportType": "off"
 			},
 			"complexity": {
 				"useLiteralKeys": "off"

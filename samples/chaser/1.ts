@@ -1,4 +1,14 @@
-import { type Direction, EMPTY, ENEMY, BLOCK, ITEM, init } from "./chaser.ts";
+/**
+ * 壁にぶつかったら向き先を変更する
+ */
+import {
+	type Direction,
+	EMPTY,
+	ENEMY,
+	BLOCK,
+	ITEM,
+	init,
+} from "../../chaser.ts";
 
 const client = await init();
 
