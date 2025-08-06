@@ -3,10 +3,14 @@ import { type Direction, EMPTY, ENEMY, BLOCK, ITEM, init } from "./chaser.ts";
 const client = await init();
 
 while (true) {
-	const values = await client.getReady();
-	console.log(values["upLeft"], values["up"], values["upRight"]);
-	console.log(values["left"], values["center"], values["right"]);
-	console.log(values["downLeft"], values["down"], values["downRight"]);
+	let readyResult = await client.getReady();
+	console.log(readyResult["upLeft"], readyResult["up"], readyResult["upRight"]);
+	console.log(readyResult["left"], readyResult["center"], readyResult["right"]);
+	console.log(
+		readyResult["downLeft"],
+		readyResult["down"],
+		readyResult["downRight"],
+	);
 	console.log("-----");
 
 	let direction: Direction = "right";

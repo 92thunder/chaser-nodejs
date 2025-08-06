@@ -15,7 +15,7 @@ const client = await init();
 let direction: Direction = "right";
 
 while (true) {
-	const readyResult = await client.getReady();
+	let readyResult = await client.getReady();
 	console.log(readyResult);
 
 	if (direction === "right" && readyResult["right"] === BLOCK) {
