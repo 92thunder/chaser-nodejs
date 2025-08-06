@@ -58,6 +58,11 @@ async function initTcpClient() {
 		console.info(`Connected to  ${host} !`);
 	});
 
+	client.on("error", () => {
+		client.destroy();
+		process.exit();
+	});
+
 	client.on("end", () => {
 		client.destroy();
 	});
@@ -95,6 +100,9 @@ async function sendCommand(client, command): Promise<Cell[9]> {
 		client.once("data", (data) => {
 			if (command !== "gr") {
 				client.write("#\r\n");
+			}
+			if (data.toString()[0] === "0") {
+				process.exit();
 			}
 			resolve(data.toString().slice(1, 10));
 		});
