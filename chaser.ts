@@ -80,7 +80,7 @@ async function initTcpClient() {
 	return client;
 }
 
-async function waitMyTurn(client) {
+async function waitMyTurn(client: net.Socket) {
 	return new Promise<void>((resolve) => {
 		client.once("data", (data) => {
 			if (data.toString().includes("@")) {
@@ -92,7 +92,10 @@ async function waitMyTurn(client) {
 	});
 }
 
-async function sendCommand(client, command): Promise<Cell[9]> {
+async function sendCommand(
+	client: net.Socket,
+	command: string,
+): Promise<Cell[9]> {
 	if (command === "gr") {
 		await waitMyTurn(client);
 	}
@@ -129,7 +132,7 @@ export async function init(): Promise<ChaserClient> {
 				raw: readyResult,
 			};
 		},
-		search(direction) {
+		search(direction: Direction) {
 			switch (direction) {
 				case "up":
 					return sendCommand(client, "su");
@@ -143,7 +146,7 @@ export async function init(): Promise<ChaserClient> {
 					throw new Error("引数が間違っています");
 			}
 		},
-		async look(direction) {
+		async look(direction: Direction) {
 			let lookResult: string;
 			switch (direction) {
 				case "up":
@@ -174,7 +177,7 @@ export async function init(): Promise<ChaserClient> {
 				raw: lookResult,
 			};
 		},
-		walk(direction) {
+		walk(direction: Direction) {
 			switch (direction) {
 				case "up":
 					return sendCommand(client, "wu");
@@ -188,7 +191,7 @@ export async function init(): Promise<ChaserClient> {
 					throw new Error("引数が間違っています");
 			}
 		},
-		put(direction) {
+		put(direction: Direction) {
 			switch (direction) {
 				case "up":
 					return sendCommand(client, "pu");
