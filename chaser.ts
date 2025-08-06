@@ -65,10 +65,12 @@ async function initTcpClient() {
 
 	client.on("end", () => {
 		client.destroy();
+		process.exit();
 	});
 
 	client.on("close", () => {
 		console.info("Connection is closed.");
+		process.exit();
 	});
 
 	client.write(`${name}\r\n`, (error) => {
