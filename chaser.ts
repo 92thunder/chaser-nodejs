@@ -11,7 +11,7 @@ type Item = "3";
 export const ITEM: Item = "3";
 
 type Cell = Empty | Enemy | Block | Item;
-type ReadyResult = {
+export type ReadyResult = {
 	upLeft: Cell;
 	up: Cell;
 	upRight: Cell;
