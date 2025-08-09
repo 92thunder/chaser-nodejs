@@ -2,3 +2,5 @@ node_modules
 main.ts
 AsahikawaProcon-Server
 docs/
+log*.txt
+*.ini
