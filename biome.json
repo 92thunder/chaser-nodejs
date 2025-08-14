@@ -3,7 +3,8 @@
 		"rules": {
 			"style": {
 				"useConst": "off",
-				"useExportType": "off"
+				"useExportType": "off",
+				"noUselessElse": "off"
 			},
 			"complexity": {
 				"useLiteralKeys": "off"
