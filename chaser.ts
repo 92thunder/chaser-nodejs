@@ -10,7 +10,7 @@ export const BLOCK: Block = "2";
 type Item = "3";
 export const ITEM: Item = "3";
 
-type Cell = Empty | Enemy | Block | Item;
+export type Cell = Empty | Enemy | Block | Item;
 export type ReadyResult = {
 	upLeft: Cell;
 	up: Cell;
