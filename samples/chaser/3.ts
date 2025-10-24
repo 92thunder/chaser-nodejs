@@ -1,5 +1,5 @@
 /**
- * 3回向き先を変更する
+ * アイテムがある方向に移動する
  */
 import {
 	type Direction,
@@ -14,25 +14,6 @@ import {
 const client = await init();
 
 let direction: Direction = "right";
-
-// 進行方向にブロックがあれば向き先を変える
-// 引数としてReadyResultを受け取る
-// 戻り値としてDirectionを返す
-function turn(direction: Direction, readyResult: ReadyResult): Direction {
-	if (direction === "right" && readyResult["right"] === BLOCK) {
-		return "down";
-	}
-	if (direction === "down" && readyResult["down"] === BLOCK) {
-		return "left";
-	}
-	if (direction === "left" && readyResult["left"] === BLOCK) {
-		return "up";
-	}
-	if (direction === "up" && readyResult["up"] === BLOCK) {
-		return "right";
-	}
-	return direction;
-}
 
 while (true) {
 	let readyResult = await client.getReady();
@@ -56,11 +37,31 @@ while (true) {
 		continue;
 	}
 
-	// 進行方向にブロックがあれば向き先を変える
-	// 3回向き先を変えることで安全な方向に移動する
-	direction = turn(direction, readyResult);
-	direction = turn(direction, readyResult);
-	direction = turn(direction, readyResult);
+	// アイテムがある方向に方向を変える
+	if (readyResult[direction] === ITEM) {
+		// 進行方向にアイテムがあれば向き先を変えない
+	} else if (readyResult["right"] === ITEM) {
+		direction = "right";
+	} else if (readyResult["down"] === ITEM) {
+		direction = "down";
+	} else if (readyResult["left"] === ITEM) {
+		direction = "left";
+	} else if (readyResult["up"] === ITEM) {
+		direction = "up";
+	}
 
+	// 進行方向にブロックがあれば向き先を変える
+	if (direction === "right" && readyResult["right"] === BLOCK) {
+		direction = "down";
+	}
+	if (direction === "down" && readyResult["down"] === BLOCK) {
+		direction = "left";
+	}
+	if (direction === "left" && readyResult["left"] === BLOCK) {
+		direction = "up";
+	}
+	if (direction === "up" && readyResult["up"] === BLOCK) {
+		direction = "right";
+	}
 	await client.walk(direction);
 }

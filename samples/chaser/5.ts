@@ -1,5 +1,5 @@
 /**
- * ループしないように回転方向をランダムにする
+ * lookで敵を見つけたら逆方向に逃げる
  */
 import {
 	type Direction,
@@ -15,47 +15,9 @@ const client = await init();
 
 let direction: Direction = "right";
 
-// 進行方向にブロックがあれば向き先を変える
-// 引数としてdirection, readyResult, turnDirectionを受け取る
-// 戻り値としてDirectionを返す
-function turn(
-	direction: Direction,
-	readyResult: ReadyResult,
-	turnDirection,
-): Direction {
-	// 進行方向にブロックがあれば向き先を変える
-	if (direction === "right" && readyResult["right"] === BLOCK) {
-		if (turnDirection === "right") {
-			return "down";
-		} else {
-			return "up";
-		}
-	}
-	if (direction === "down" && readyResult["down"] === BLOCK) {
-		if (turnDirection === "right") {
-			return "left";
-		} else {
-			return "right";
-		}
-	}
-	if (direction === "left" && readyResult["left"] === BLOCK) {
-		if (turnDirection === "right") {
-			return "up";
-		} else {
-			return "down";
-		}
-	}
-	if (direction === "up" && readyResult["up"] === BLOCK) {
-		if (turnDirection === "right") {
-			return "right";
-		} else {
-			return "left";
-		}
-	}
-	return direction;
-}
-
+let count = 0;
 while (true) {
+	count++;
 	let readyResult = await client.getReady();
 	console.log(readyResult);
 
@@ -90,6 +52,28 @@ while (true) {
 		direction = "up";
 	}
 
+	// countが3で割り切れたら
+	if (count % 3 === 0) {
+		let lookResult = await client.look(direction);
+
+		// lookした範囲に敵がいたら
+		console.log(lookResult.raw, lookResult.raw.includes(ENEMY));
+		if (lookResult.raw.includes(ENEMY)) {
+			// 逆方向に向き先を変える
+			if (direction === "right") {
+				direction = "left";
+			} else if (direction === "left") {
+				direction = "right";
+			} else if (direction === "up") {
+				direction = "down";
+			} else if (direction === "down") {
+				direction = "up";
+			}
+			console.log(direction);
+		}
+		continue;
+	}
+
 	// 回転方向をランダムにする
 	let turnDirection = "right";
 	if (0.5 < Math.random()) {
@@ -97,10 +81,34 @@ while (true) {
 	}
 
 	// 進行方向にブロックがあれば向き先を変える
-	// 3回向き先を変えることで安全な方向に移動する
-	direction = turn(direction, readyResult, turnDirection);
-	direction = turn(direction, readyResult, turnDirection);
-	direction = turn(direction, readyResult, turnDirection);
+	if (direction === "right" && readyResult["right"] === BLOCK) {
+		if (turnDirection === "right") {
+			direction = "down";
+		} else {
+			direction = "up";
+		}
+	}
+	if (direction === "down" && readyResult["down"] === BLOCK) {
+		if (turnDirection === "right") {
+			direction = "left";
+		} else {
+			direction = "right";
+		}
+	}
+	if (direction === "left" && readyResult["left"] === BLOCK) {
+		if (turnDirection === "right") {
+			direction = "up";
+		} else {
+			direction = "down";
+		}
+	}
+	if (direction === "up" && readyResult["up"] === BLOCK) {
+		if (turnDirection === "right") {
+			direction = "right";
+		} else {
+			direction = "left";
+		}
+	}
 
 	await client.walk(direction);
 }
