@@ -2,13 +2,13 @@
  * アイテムがある方向に移動する
  */
 import {
+	BLOCK,
 	type Direction,
-	type ReadyResult,
 	EMPTY,
 	ENEMY,
-	BLOCK,
 	ITEM,
 	init,
+	type ReadyResult,
 } from "../../chaser.ts";
 
 const client = await init();

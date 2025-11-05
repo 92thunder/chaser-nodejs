@@ -2,13 +2,13 @@
  * 関数を作って3回向き先を変更する
  */
 import {
+	BLOCK,
 	type Direction,
-	type ReadyResult,
 	EMPTY,
 	ENEMY,
-	BLOCK,
 	ITEM,
 	init,
+	type ReadyResult,
 } from "../../chaser.ts";
 
 const client = await init();

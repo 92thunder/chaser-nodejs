@@ -1,4 +1,4 @@
-import { type Direction, EMPTY, ENEMY, BLOCK, ITEM, init } from "./chaser.ts";
+import { BLOCK, type Direction, EMPTY, ENEMY, ITEM, init } from "./chaser.ts";
 
 const client = await init();
 

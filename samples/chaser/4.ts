@@ -2,13 +2,13 @@
  * ループしないように回転方向をランダムにする
  */
 import {
+	BLOCK,
 	type Direction,
-	type ReadyResult,
 	EMPTY,
 	ENEMY,
-	BLOCK,
 	ITEM,
 	init,
+	type ReadyResult,
 } from "../../chaser.ts";
 
 const client = await init();

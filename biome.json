@@ -8,6 +8,9 @@
 			},
 			"complexity": {
 				"useLiteralKeys": "off"
+			},
+			"correctness": {
+				"noUnusedImports": "off"
 			}
 		}
 	}

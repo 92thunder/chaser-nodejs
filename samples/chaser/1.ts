@@ -2,10 +2,10 @@
  * 壁にぶつかったら向き先を変更する
  */
 import {
+	BLOCK,
 	type Direction,
 	EMPTY,
 	ENEMY,
-	BLOCK,
 	ITEM,
 	init,
 } from "../../chaser.ts";

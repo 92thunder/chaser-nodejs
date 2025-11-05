@@ -2,10 +2,10 @@
  * 敵を見つけたらブロックを置く
  */
 import {
+	BLOCK,
 	type Direction,
 	EMPTY,
 	ENEMY,
-	BLOCK,
 	ITEM,
 	init,
 } from "../../chaser.ts";
