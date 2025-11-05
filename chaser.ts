@@ -34,10 +34,10 @@ interface ChaserClient {
 	put(direction: Direction): Promise<string>;
 }
 
-async function initTcpClient() {
+async function initTcpClient(username?: string) {
 	let host = "127.0.0.1";
 	let port = 2009;
-	let name = "test player";
+	let name = username || "test player";
 
 	if (process.env.NODE_ENV !== "development") {
 		const rl = readline.createInterface({
@@ -49,8 +49,7 @@ async function initTcpClient() {
 			(await rl.question("サーバーのIPアドレスを入力してください > ")) ||
 			"127.0.0.1";
 		port = Number(await rl.question("ポート番号を入力してください > ")) || 2009;
-		name =
-			(await rl.question("ユーザー名を入力してください > ")) || "test player";
+		name = (await rl.question("ユーザー名を入力してください > ")) || name;
 		rl.close();
 	}
 
@@ -115,8 +114,8 @@ async function sendCommand(
 	});
 }
 
-export async function init(): Promise<ChaserClient> {
-	const client = await initTcpClient();
+export async function init(username?: string): Promise<ChaserClient> {
+	const client = await initTcpClient(username);
 
 	const chaserClient = {
 		async getReady(): Promise<ReadyResult> {
