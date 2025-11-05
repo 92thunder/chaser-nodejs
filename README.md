@@ -2,6 +2,8 @@
 
 [U-16プログラミングコンテスト](https://www.procon-asahikawa.org/) の競技部門で利用される対戦型プラットフォーム『CHaser』のNode.js向けクライアントライブラリです。
 
+Node.js 23以降でTypeScriptファイルを直接実行できるようになったため、タイプミスを減らしコードの品質を向上させる目的でTypeScriptを採用しています。
+
 ## 環境構築
 
 ### CHaser Serverのダウンロード
@@ -12,7 +14,7 @@
 
 [Node.jsのダウンロードページ](https://nodejs.org/en/download/prebuilt-installer/current) から環境にあった Node.js をインストールしてください。
 
-Windows で Prebuilt Installer 20.17.0 を使って動作確認しています。
+Windows で Prebuilt Installer 24.2.0 を使って動作確認しています。
 
 ### 依存パッケージのインストール
 
@@ -58,10 +60,8 @@ node sample.ts
 VSCodeでより便利にデバッグしながら開発できます：
 
 1. `sample.ts` をVSCodeで開く
-2. **F5キー** を押す、または「実行とデバッグ」パネルから「Launch Program」を選択
+2. **F5キー** を押す
 3. 統合ターミナルにプロンプトが表示されるので、必要に応じて入力（デフォルト値を使う場合は3回Enterキー）
-
-ブレークポイントを設定することで、コードの実行を止めて変数の値を確認できます。
 
 ## プロジェクト構成
 
