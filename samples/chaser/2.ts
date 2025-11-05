@@ -19,34 +19,34 @@ while (true) {
 	console.log(readyResult);
 
 	// 敵が上下左右にいたらブロックを置く
-	if (readyResult["right"] === ENEMY) {
+	if (readyResult.right === ENEMY) {
 		await client.put("right");
 		continue;
 	}
-	if (readyResult["down"] === ENEMY) {
+	if (readyResult.down === ENEMY) {
 		await client.put("down");
 		continue;
 	}
-	if (readyResult["left"] === ENEMY) {
+	if (readyResult.left === ENEMY) {
 		await client.put("left");
 		continue;
 	}
-	if (readyResult["up"] === ENEMY) {
+	if (readyResult.up === ENEMY) {
 		await client.put("up");
 		continue;
 	}
 
 	// 進行方向にブロックがあれば向き先を変える
-	if (direction === "right" && readyResult["right"] === BLOCK) {
+	if (direction === "right" && readyResult.right === BLOCK) {
 		direction = "down";
 	}
-	if (direction === "down" && readyResult["down"] === BLOCK) {
+	if (direction === "down" && readyResult.down === BLOCK) {
 		direction = "left";
 	}
-	if (direction === "left" && readyResult["left"] === BLOCK) {
+	if (direction === "left" && readyResult.left === BLOCK) {
 		direction = "up";
 	}
-	if (direction === "up" && readyResult["up"] === BLOCK) {
+	if (direction === "up" && readyResult.up === BLOCK) {
 		direction = "right";
 	}
 	await client.walk(direction);

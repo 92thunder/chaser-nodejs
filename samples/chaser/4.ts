@@ -20,19 +20,19 @@ while (true) {
 	console.log(readyResult);
 
 	// 敵が上下左右にいたらブロックを置く
-	if (readyResult["right"] === ENEMY) {
+	if (readyResult.right === ENEMY) {
 		await client.put("right");
 		continue;
 	}
-	if (readyResult["down"] === ENEMY) {
+	if (readyResult.down === ENEMY) {
 		await client.put("down");
 		continue;
 	}
-	if (readyResult["left"] === ENEMY) {
+	if (readyResult.left === ENEMY) {
 		await client.put("left");
 		continue;
 	}
-	if (readyResult["up"] === ENEMY) {
+	if (readyResult.up === ENEMY) {
 		await client.put("up");
 		continue;
 	}
@@ -40,13 +40,13 @@ while (true) {
 	// アイテムがある方向に方向を変える
 	if (readyResult[direction] === ITEM) {
 		// 進行方向にアイテムがあれば向き先を変えない
-	} else if (readyResult["right"] === ITEM) {
+	} else if (readyResult.right === ITEM) {
 		direction = "right";
-	} else if (readyResult["down"] === ITEM) {
+	} else if (readyResult.down === ITEM) {
 		direction = "down";
-	} else if (readyResult["left"] === ITEM) {
+	} else if (readyResult.left === ITEM) {
 		direction = "left";
-	} else if (readyResult["up"] === ITEM) {
+	} else if (readyResult.up === ITEM) {
 		direction = "up";
 	}
 
@@ -57,28 +57,28 @@ while (true) {
 	}
 
 	// 進行方向にブロックがあれば向き先を変える
-	if (direction === "right" && readyResult["right"] === BLOCK) {
+	if (direction === "right" && readyResult.right === BLOCK) {
 		if (turnDirection === "right") {
 			direction = "down";
 		} else {
 			direction = "up";
 		}
 	}
-	if (direction === "down" && readyResult["down"] === BLOCK) {
+	if (direction === "down" && readyResult.down === BLOCK) {
 		if (turnDirection === "right") {
 			direction = "left";
 		} else {
 			direction = "right";
 		}
 	}
-	if (direction === "left" && readyResult["left"] === BLOCK) {
+	if (direction === "left" && readyResult.left === BLOCK) {
 		if (turnDirection === "right") {
 			direction = "up";
 		} else {
 			direction = "down";
 		}
 	}
-	if (direction === "up" && readyResult["up"] === BLOCK) {
+	if (direction === "up" && readyResult.up === BLOCK) {
 		if (turnDirection === "right") {
 			direction = "right";
 		} else {

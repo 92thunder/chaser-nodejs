@@ -18,16 +18,16 @@ while (true) {
 	let readyResult = await client.getReady();
 	console.log(readyResult);
 
-	if (direction === "right" && readyResult["right"] === BLOCK) {
+	if (direction === "right" && readyResult.right === BLOCK) {
 		direction = "down";
 	}
-	if (direction === "down" && readyResult["down"] === BLOCK) {
+	if (direction === "down" && readyResult.down === BLOCK) {
 		direction = "left";
 	}
-	if (direction === "left" && readyResult["left"] === BLOCK) {
+	if (direction === "left" && readyResult.left === BLOCK) {
 		direction = "up";
 	}
-	if (direction === "up" && readyResult["up"] === BLOCK) {
+	if (direction === "up" && readyResult.up === BLOCK) {
 		direction = "right";
 	}
 	await client.walk(direction);
