@@ -1,5 +1,5 @@
-import readline from "node:readline/promises";
 import net from "node:net";
+import readline from "node:readline/promises";
 
 type Empty = "0";
 export const EMPTY: Empty = "0";
