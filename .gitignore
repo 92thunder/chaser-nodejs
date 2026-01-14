@@ -1,5 +1,5 @@
 node_modules
-main.ts
+./main.ts
 AsahikawaProcon-Server
 docs/
 log*.txt
