@@ -14,7 +14,7 @@ Node.js 23以降でTypeScriptファイルを直接実行できるようになっ
 
 [Node.jsのダウンロードページ](https://nodejs.org/en/download/prebuilt-installer/current) から環境にあった Node.js をインストールしてください。
 
-Windows で Prebuilt Installer 24.2.0 を使って動作確認しています。
+Node.js 26 をインストールしてください。Windows で Node.js 26.12.1 を使って動作確認しています。exe へのビルド（後述）には 25.5 以降が必要です。
 
 ### 依存パッケージのインストール
 
@@ -64,7 +64,7 @@ VSCodeでより便利にデバッグしながら開発できます：
 
 ### exe にビルドする（SEA）
 
-Node.js 標準の [SEA（Single Executable Applications）](https://nodejs.org/api/single-executable-applications.html) で、`main.js` を Windows 用の exe 1ファイルにまとめられます。Node.js 25.5 以降が必要です。
+Node.js 標準の [SEA（Single Executable Applications）](https://nodejs.org/api/single-executable-applications.html) で、`main.js` を Windows 用の exe 1ファイルにまとめられます。Node.js 25.5 以降が必要です（26.12.1 で動作確認しています）。
 
 ```sh
 npm run build
