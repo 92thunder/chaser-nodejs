@@ -4,3 +4,4 @@ AsahikawaProcon-Server
 docs/
 log*.txt
 *.ini
+dist/

@@ -1,0 +1,6 @@
+{
+	"main": "dist/player.js",
+	"mainFormat": "module",
+	"output": "dist/player.exe",
+	"disableExperimentalSEAWarning": true
+}
