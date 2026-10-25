@@ -64,24 +64,24 @@ VSCodeでより便利にデバッグしながら開発できます：
 
 ### exe にビルドする（SEA）
 
-Node.js 標準の [SEA（Single Executable Applications）](https://nodejs.org/api/single-executable-applications.html) で、`main.js` を Windows 用の exe 1ファイルにまとめられます。Node.js 25.5 以降が必要です（26.12.1 で動作確認しています）。
+Node.js 標準の [SEA（Single Executable Applications）](https://nodejs.org/api/single-executable-applications.html) で、`main.ts` を Windows 用の exe 1ファイルにまとめられます。Node.js 25.5 以降が必要です（26.12.1 で動作確認しています）。
 
 ```sh
 npm run build
 ```
 
-`main.js` と `chaser.ts` を esbuild で `dist/player.js` にまとめてから、`dist/player.exe` を作ります。できた exe はダブルクリックで起動でき、Node.js が入っていない PC でも動きます。
+`main.ts` と `chaser.ts` を esbuild で `build/main.js` にまとめてから、`dist/main.exe` を作ります。できた exe はダブルクリックで起動でき、Node.js が入っていない PC でも動きます。
 
 ### モックサーバーで試す
 
 CHaser Server を起動しなくても、`tools/mock-server.js` で対戦を試せます。本物と同じ手順で通信し、勝ち・負け・引き分けまで判定します。
 
 ```sh
-# 内蔵 bot（HOT）と対戦。COOL はポート 2009 で接続を待つので、別のターミナルで exe や node main.js を起動してつなぐ
+# 内蔵 bot（HOT）と対戦。COOL はポート 2009 で接続を待つので、別のターミナルで exe や node main.ts を起動してつなぐ
 npm run mock -- maps/dev1.map
 
 # exe を自動で起動して対戦し、盤面も表示する
-npm run mock -- tools/maps/win-items.map --cool "cmd:dist/player.exe" --view
+npm run mock -- tools/maps/win-items.map --cool "cmd:dist/main.exe" --view
 ```
 
 | オプション | 意味 |
@@ -93,7 +93,7 @@ npm run mock -- tools/maps/win-items.map --cool "cmd:dist/player.exe" --view
 | `--quiet` | 結果だけ表示する |
 | `--expect cool\|hot\|draw` | 結果が違えば終了コード 1 で終わる |
 
-`tools/maps/` には、右に進み続けるだけのプレイヤー（今の `main.js`）で勝ち・負け・引き分けを確かめるためのマップがあります。細かいルールの仮定は `tools/mock-server.js` の冒頭に書いています。
+`tools/maps/` には、右に進み続けるだけのプレイヤー（今の `main.ts`）で勝ち・負け・引き分けを確かめるためのマップがあります。細かいルールの仮定は `tools/mock-server.js` の冒頭に書いています。
 
 ## プロジェクト構成
 

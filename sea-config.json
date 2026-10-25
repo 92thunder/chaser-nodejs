@@ -1,6 +1,6 @@
 {
-	"main": "dist/player.js",
+	"main": "build/main.js",
 	"mainFormat": "module",
-	"output": "dist/player.exe",
+	"output": "dist/main.exe",
 	"disableExperimentalSEAWarning": true
 }

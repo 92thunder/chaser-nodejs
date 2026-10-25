@@ -16,7 +16,7 @@
  *
  * 例:
  *   node tools/mock-server.js maps/dev1.map
- *   node tools/mock-server.js tools/maps/win-items.map --cool "cmd:dist/player.exe" --expect cool
+ *   node tools/mock-server.js tools/maps/win-items.map --cool "cmd:dist/main.exe" --expect cool
  *
  * ルール（モックの仮定。本物のサーバーと細部が違う可能性がある）:
  *   - マップの外はブロック扱い
@@ -356,7 +356,7 @@ function acceptPlayer(side, port, timeout) {
 // コマンドを起動し、IP・ポート・名前の質問に順に答える
 function launchCommand(side, command, port) {
 	const answers = ["127.0.0.1", String(port), side.toLowerCase()];
-	// シェルを通さずに起動する（Windows の cmd.exe は dist/player.exe のような / 区切りを受け付けないため）
+	// シェルを通さずに起動する（Windows の cmd.exe は dist/main.exe のような / 区切りを受け付けないため）
 	const [file, ...args] = command.split(/\s+/);
 	const child = spawn(file, args);
 	child.on("error", (error) =>
