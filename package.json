@@ -7,7 +7,7 @@
 	"scripts": {
 		"build": "esbuild main.js --bundle --platform=node --format=esm --outfile=dist/player.js && node --build-sea sea-config.json",
 		"mock": "node tools/mock-server.js",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "node --test test/"
 	},
 	"author": "",
 	"license": "ISC",
