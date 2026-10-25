@@ -32,7 +32,7 @@ test("1.ts は外周をぐるぐる回るだけで、真ん中のアイテムを
 	);
 });
 
-test("7.ts は何回も来たマスに気づいて、真ん中のアイテムを取りに行ける", () => {
+test("7.ts は何回も来たマスに気づいて脱出し、真ん中のアイテムを取りに行ける", () => {
 	assert.equal(
 		play("samples/chaser/7.ts", "tools/maps/loop-items.map", 2103),
 		"cool",
